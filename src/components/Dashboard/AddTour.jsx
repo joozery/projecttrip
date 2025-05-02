@@ -50,7 +50,7 @@ function AddTour() {
   // ✅ โหลดประเทศจาก API
   useEffect(() => {
     axios
-      .get("https://servergogo-app-209f1146e735.herokuapp.com/api/countries")
+      .get("https://projecttour-b58cf17beb2d.herokuapp.com/api/countries")
       .then((response) => setCountries(response.data))
       .catch((error) => console.error("Error loading countries:", error));
   }, []);
@@ -60,7 +60,7 @@ function AddTour() {
       setLoading(true);
       axios
         .get(
-          `https://servergogo-app-209f1146e735.herokuapp.com/api/tours/${tourId}`
+          `https://projecttour-b58cf17beb2d.herokuapp.com/api/tours/${tourId}`
         )
         .then((response) => {
           const tourData = response.data.tour;
@@ -344,7 +344,7 @@ function AddTour() {
       if (tourId) {
         // ✅ แก้ไขข้อมูล (PUT)
         const response = await axios.put(
-          `https://servergogo-app-209f1146e735.herokuapp.com/api/tours/${tourId}`,
+          `https://projecttour-b58cf17beb2d.herokuapp.com/api/tours/${tourId}`,
           formDataToSend,
           {
             headers: { "Content-Type": "multipart/form-data" },
@@ -367,7 +367,7 @@ function AddTour() {
         }
       } else {
         const response = await axios.post(
-          "https://servergogo-app-209f1146e735.herokuapp.com/api/tours",
+          "https://projecttour-b58cf17beb2d.herokuapp.com/api/tours",
           formDataToSend,
           {
             headers: { "Content-Type": "multipart/form-data" },

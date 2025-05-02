@@ -32,7 +32,7 @@ const TourForm = ({ onTourCreated }) => {
     if (pdfFile) formDataToSend.append("pdf_file", pdfFile);
 
     try {
-      const response = await axios.post("https://servergogo-app-209f1146e735.herokuapp.com/api/tours", formDataToSend, {
+      const response = await axios.post("https://projecttour-b58cf17beb2d.herokuapp.com/api/tours", formDataToSend, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       setMessage(response.data.message);

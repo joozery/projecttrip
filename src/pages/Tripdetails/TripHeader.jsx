@@ -14,7 +14,7 @@ const TripHeader = ({ tourId, HeaderData }) => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `https://servergogo-app-209f1146e735.herokuapp.com/api/gallery/${tourId}`
+        `https://projecttour-b58cf17beb2d.herokuapp.com/api/gallery/${tourId}`
       );
       console.log("response header", response.data);
       setTourimage(response.data);

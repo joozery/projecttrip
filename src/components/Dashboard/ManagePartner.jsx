@@ -10,7 +10,7 @@ const ManagePartner = () => {
   // ✅ โหลดข้อมูล Partner Brands จาก API
   useEffect(() => {
     axios
-      .get("https://servergogo-app-209f1146e735.herokuapp.com/api/partners")
+      .get("https://projecttour-b58cf17beb2d.herokuapp.com/api/partners")
       .then((res) => setPartners(res.data))
       .catch((err) => console.error(err));
   }, []);
@@ -24,7 +24,7 @@ const ManagePartner = () => {
     formData.append("name", newName);
 
     axios
-      .post("https://servergogo-app-209f1146e735.herokuapp.com/api/partners", formData, {
+      .post("https://projecttour-b58cf17beb2d.herokuapp.com/api/partners", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       })
       .then((res) => {
@@ -39,7 +39,7 @@ const ManagePartner = () => {
   // ✅ ฟังก์ชันลบพาร์ทเนอร์
   const deletePartner = (id) => {
     axios
-      .delete(`https://servergogo-app-209f1146e735.herokuapp.com/api/partners/${id}`)
+      .delete(`https://projecttour-b58cf17beb2d.herokuapp.com/api/partners/${id}`)
       .then(() => {
         setPartners(partners.filter((partner) => partner.id !== id));
       })

@@ -9,7 +9,7 @@ import TourStatusSwitch from "./TourStatusSwitch";
 import { thumbnailURL } from "../helper/thumnail-resize";
 
 const API_BASE_URL =
-  "https://servergogo-app-209f1146e735.herokuapp.com/api/tours";
+  "https://projecttour-b58cf17beb2d.herokuapp.com/api/tours";
 
 const TourCard = ({ tour, Success }) => {
   const navigate = useNavigate();

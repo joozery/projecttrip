@@ -6,7 +6,7 @@ import { FaSpinner } from "react-icons/fa";
 import CountryFlag from "../CountryFlag";
 
 const API_URL =
-  "https://servergogo-app-209f1146e735.herokuapp.com/api/countries";
+  "https://projecttour-b58cf17beb2d.herokuapp.com/api/countries";
 
 const ManageCountry = () => {
   const [countries, setCountries] = useState([]);

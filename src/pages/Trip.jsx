@@ -61,14 +61,14 @@ const TripPage = () => {
       const [countriesResponse, toursResponse, recommendResponse] =
         await Promise.all([
           axios.get(
-            `https://servergogo-app-209f1146e735.herokuapp.com/api/countries`
+            `https://projecttour-b58cf17beb2d.herokuapp.com/api/countries`
           ),
           axios.post(
-            `https://servergogo-app-209f1146e735.herokuapp.com/api/tours/search`,
+            `https://projecttour-b58cf17beb2d.herokuapp.com/api/tours/search`,
             body
           ),
           axios.post(
-            `https://servergogo-app-209f1146e735.herokuapp.com/api/tours/search/recommend`,
+            `https://projecttour-b58cf17beb2d.herokuapp.com/api/tours/search/recommend`,
             body
           ),
         ]);

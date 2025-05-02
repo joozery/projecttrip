@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, FreeMode } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 import "swiper/css";
-import "swiper/css/free-mode";
 import { LuImages } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
 
@@ -10,20 +9,18 @@ const ImageGallery = () => {
   const navigate = useNavigate();
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
-  const MIN_IMAGES = 12; // กำหนดจำนวนรูปที่ต้องการให้เต็ม
+  const MIN_IMAGES = 12;
 
-  // เรียก API เพื่อนำข้อมูลมาแสดง
   useEffect(() => {
     const fetchGallery = async () => {
       try {
         const response = await fetch(
-          "https://servergogo-app-209f1146e735.herokuapp.com/api/gallery"
-        ); // เปลี่ยนเป็น API จริง
+          "https://projecttour-b58cf17beb2d.herokuapp.com/api/gallery"
+        );
         const data = await response.json();
-
         if (Array.isArray(data)) {
           const imageUrls = data.map((item) => item.image_url);
-          setImages(fillImages(imageUrls, MIN_IMAGES)); // เรียกฟังก์ชันให้เติมรูปจนครบ
+          setImages(fillImages(imageUrls, MIN_IMAGES));
         }
       } catch (error) {
         console.error("Error fetching gallery:", error);
@@ -35,7 +32,6 @@ const ImageGallery = () => {
     fetchGallery();
   }, []);
 
-  // ฟังก์ชันเติมรูปให้ครบตามจำนวนที่กำหนด
   const fillImages = (originalImages, minCount) => {
     if (originalImages.length >= minCount) return originalImages;
     let newImages = [...originalImages];
@@ -46,96 +42,57 @@ const ImageGallery = () => {
   };
 
   return (
-    <div className="relative w-full max-w-6xl mx-auto">
-      <h2 className="relative text-2xl flex z-20 font-bold text-gray-800 text-start mb-10">
-        แกลเลอรี่รูปภาพ
-      </h2>
-
-      {loading ? (
-        <p className="text-center text-gray-500">กำลังโหลด...</p>
-      ) : images.length > 0 ? (
-        <div className="z-0 space-y-6">
-          {/* Swiper Carousel Row 1 */}
-          <Swiper
-            modules={[Autoplay, FreeMode]}
-            // slidesPerView={6}
-            spaceBetween={5}
-            loop={true}
-            autoplay={{ delay: 5000, disableOnInteraction: true }}
-            freeMode={true}
-            breakpoints={{
-              320: { slidesPerView: 2 },  // มือถือเล็ก
-              480: { slidesPerView: 3 },  // มือถือใหญ่
-              768: { slidesPerView: 4 },  // แท็บเล็ต
-              1024: { slidesPerView: 6 }, // หน้าจอปกติ
-            }}
-            className="w-full"
+    <section className="py-16 bg-gradient-to-b  to-white">
+      <div className="container mx-auto px-6 md:px-12">
+        <div className="flex justify-between items-center mb-10">
+          <h2 className="text-2xl md:text-3xl font-bold text-yellow-800">
+            แกลเลอรี่ภาพความประทับใจ
+          </h2>
+          <button
+            onClick={() => navigate("/Gallery")}
+            className="flex items-center gap-2 text-sm md:text-base px-4 py-2 rounded-full border border-yellow-600 text-yellow-800 bg-yellow-100 hover:scale-105 transition font-semibold"
           >
-            {images
-              .slice(0, Math.ceil(images.length / 2))
-              .map((image, index) => (
-                <SwiperSlide key={index}>
-                  <div className="w-full h-[130px] rounded-3xl overflow-hidden shadow-lg">
-                    <img
-                      src={image}
-                      alt={`Gallery ${index + 1}`}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </SwiperSlide>
-              ))}
-          </Swiper>
+            ดูทั้งหมด <LuImages />
+          </button>
+        </div>
 
-          {/* Swiper Carousel Row 2 with Offset */}
+        {loading ? (
+          <p className="text-center text-gray-500">กำลังโหลด...</p>
+        ) : images.length > 0 ? (
           <Swiper
-            modules={[Autoplay, FreeMode]}
-            // slidesPerView={6}
-            spaceBetween={5}
+            modules={[Autoplay]}
+            spaceBetween={20}
+            slidesPerView={3}
             loop={true}
-            autoplay={{ delay: 5000, disableOnInteraction: true }}
-            freeMode={true}
-            breakpoints={{
-              320: { slidesPerView: 2 },  // มือถือเล็ก
-              480: { slidesPerView: 3 },  // มือถือใหญ่
-              768: { slidesPerView: 4 },  // แท็บเล็ต
-              1024: { slidesPerView: 6 }, // หน้าจอปกติ
+            autoplay={{
+              delay: 3500,
+              disableOnInteraction: false,
             }}
-            className="w-full pl-10"
+            breakpoints={{
+              320: { slidesPerView: 1.5 },
+              640: { slidesPerView: 2.5 },
+              1024: { slidesPerView: 4 },
+            }}
+            className="gallery-swiper"
           >
-            {images.slice(Math.ceil(images.length / 2)).map((image, index) => (
-              <SwiperSlide key={index}>
-                <div className="w-full h-[130px] rounded-3xl overflow-hidden shadow-lg">
+            {images.map((img, idx) => (
+              <SwiperSlide key={idx}>
+                <div className="rounded-2xl overflow-hidden shadow-lg group relative">
                   <img
-                    src={image}
-                    alt={`Gallery ${index + 1}`}
-                    className="w-full h-full object-cover"
+                    src={img}
+                    alt={`Gallery ${idx + 1}`}
+                    className="w-full h-[180px] object-cover group-hover:scale-105 transition duration-500"
                   />
+                  <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition duration-500"></div>
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
-        </div>
-      ) : (
-        <p className="text-center text-gray-500">ไม่มีรูปภาพในแกลเลอรี่</p>
-      )}
-
-      {/* Left Overlay */}
-      <div className="absolute top-0 left-0 h-full w-36 z-10 bg-gradient-to-r from-white to-transparent pointer-events-none"></div>
-
-      {/* Right Overlay */}
-      <div className="absolute top-0 right-0 h-full w-36 z-10 bg-gradient-to-l from-white to-transparent pointer-events-none"></div>
-
-      {/* View More Button */}
-      <div className="flex justify-center items-center mt-6 text-center">
-        <button
-          onClick={() => window.location.href = "/Gallery"}
-          className="flex items-center justify-center gap-2 border rounded-full shadow-md px-4 py-2 text-[#3F72B7] bg-[#ECF1F8] hover:scale-105 border-[#3F72B7] transition"
-        >
-          <span>ดูรูปภาพเพิ่มเติม</span>
-          <LuImages />
-        </button>
+        ) : (
+          <p className="text-center text-gray-400">ไม่มีรูปภาพในแกลเลอรี่</p>
+        )}
       </div>
-    </div>
+    </section>
   );
 };
 

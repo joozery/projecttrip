@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "swiper/css/navigation";
 import "swiper/css/pagination";
 import {
   Navigation,
@@ -14,13 +13,12 @@ import axios from "axios";
 
 const Partner = () => {
   const [partners, setPartners] = useState([]);
+
   const GetPartner = async () => {
     try {
       const response = await axios.get(
-        "https://servergogo-app-209f1146e735.herokuapp.com/api/partners"
-      ); // หรือ URL ของ API endpoint ของคุณ
-      console.log(response.data); // แสดงข้อมูลพาร์ทเนอร์ใน console
-      // นำข้อมูล response.data ไปใช้งาน
+        "https://projecttour-b58cf17beb2d.herokuapp.com/api/partners"
+      );
       setPartners(response.data);
     } catch (error) {
       console.error("Error fetching partners:", error);
@@ -30,85 +28,56 @@ const Partner = () => {
   useEffect(() => {
     GetPartner();
   }, []);
+
   return (
-    <>
-      <div className="flex flex-col items-center container mx-auto">
-        <div className="flex justify-between items-center w-full md:px-10">
-          <span className="text-lg font-semibold text-[#18283E]">
-            พาร์ทเนอร์ของเรา
-          </span>
-          {/* <span className="bg-[#D4D9E033] text-[#3F72B7] text-xs font-semibold px-2 py-1 rounded-full">
-              100% แนะนำ
-            </span> */}
-        </div>
-        <div className="flex w-full items-start">
-          {/* <span className="w-1/2 text-lg font-light  text-[#748193]">
-            มั่นใจทุกการเดินทาง กับรีวิวจากนักเดินทางที่ประทับใจ 100%
-            แนะนำให้คุณสัมผัสประสบการณ์สุดพิเศษไปกับเรา
-          </span> */}
-        </div>
-      </div>
-      <div className="relative w-full max-w-6xl mx-auto">
-        <div className="">
+    <section className="py-16 bg-[#FDF8EE] relative">
+      <div className="container mx-auto px-6 md:px-12 text-center">
+        <h2 className="text-2xl md:text-3xl font-bold text-yellow-800 mb-4">
+          พาร์ทเนอร์ของเรา
+        </h2>
+        <p className="text-gray-600 max-w-xl mx-auto mb-10">
+          เราภูมิใจที่ได้ร่วมงานกับพาร์ทเนอร์มากมายที่เชื่อมั่นในคุณภาพบริการของ TourBU
+        </p>
+
+        <div className="relative">
           <Swiper
-            spaceBetween={50} // ระยะห่างระหว่าง slide
-            slidesPerView={3} // จำนวน slide ที่แสดงพร้อมกัน
-            navigation={false} // แสดงปุ่มนำทาง
-            mousewheel={true} // เปิดใช้งานการเลื่อนด้วย mousewheel
-            keyboard={true} // เปิดใช้งานการเลื่อนด้วย keyboard
-            modules={[Navigation, Pagination, Mousewheel, Keyboard, Autoplay]} // กำหนด modules ที่ใช้
-            autoplay={{
-              delay: 2500, // ระยะเวลาในการสไลด์ (milliseconds)
-              disableOnInteraction: false, // ให้ autoplay ทำงานต่อเมื่อมีการ interaction
-            }}
+            spaceBetween={30}
+            slidesPerView={4}
             loop={true}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+            }}
+            keyboard={true}
+            mousewheel={true}
+            modules={[Pagination, Mousewheel, Keyboard, Autoplay]}
             breakpoints={{
-              320: {
-                slidesPerView: 1,
-                spaceBetween: 20,
-              },
-              480: {
-                slidesPerView: 2,
-                spaceBetween: 30,
-              },
-              640: {
-                slidesPerView: 3,
-                spaceBetween: 40,
-              },
-              768: {
-                slidesPerView: 4,
-                spaceBetween: 50,
-              },
-            }} // กำหนด breakpoints เพื่อให้แสดงผล responsive
+              320: { slidesPerView: 1 },
+              480: { slidesPerView: 2 },
+              768: { slidesPerView: 3 },
+              1024: { slidesPerView: 4 },
+            }}
           >
             {partners.map((partner) => (
               <SwiperSlide key={partner.id}>
-                <div
-                  className="p-2 rounded-lg border shadow-md"
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
+                <div className="bg-white p-4 rounded-xl shadow-md hover:shadow-xl transition hover:scale-105 duration-300 flex items-center justify-center h-[140px]">
                   <img
                     src={partner.logo}
                     alt={partner.name}
-                    className="max-w-full h-[150px] object-cover"
-                    // style={{ maxWidth: "100%", maxHeight: "150px" }}
+                    className="h-full max-h-[100px] object-contain"
                   />
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
-          {/* Left Overlay */}
-          <div className="absolute top-0 left-0 h-full w-36 z-10 bg-gradient-to-r from-white to-transparent pointer-events-none"></div>
 
-          {/* Right Overlay */}
-          <div className="absolute top-0 right-0 h-full w-36 z-10 bg-gradient-to-l from-white to-transparent pointer-events-none"></div>
+          {/* Gradient Overlay */}
+          <div className="absolute top-0 left-0 w-16 h-full bg-gradient-to-r from-[#FDF8EE] to-transparent z-10 pointer-events-none" />
+          <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-[#FDF8EE] to-transparent z-10 pointer-events-none" />
         </div>
       </div>
-    </>
+    </section>
   );
 };
+
 export default Partner;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const API_BASE_URL = "https://servergogo-app-209f1146e735.herokuapp.com/api";
+const API_BASE_URL = "https://projecttour-b58cf17beb2d.herokuapp.com/api";
 
 const TourDetailsSection = ({ tourData, handleChange, requirefield }) => {
   const [countries, setCountries] = useState([]);

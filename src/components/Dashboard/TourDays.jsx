@@ -66,7 +66,7 @@ const TourDaysForm = ({ tourId }) => {
         }
 
         await axios.post(
-          "https://servergogo-app-209f1146e735.herokuapp.com/api/tourdays",
+          "https://projecttour-b58cf17beb2d.herokuapp.com/api/tourdays",
           formData,
           {
             headers: { "Content-Type": "multipart/form-data" },

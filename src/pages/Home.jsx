@@ -11,13 +11,10 @@ const Home = () => {
   return (
     <div className="min-h-screen space-y-20">
       <Hero />
-      <About />
-      <CountryCarousel />
       <Partner/>
-      <ReviewFacebook />
       <ImageGallery />
       <BeginTrip />
-      <FAQ />
+
     </div>
   );
 };

@@ -6,7 +6,7 @@ import TourCard from "../CardData";
 import { FaSpinner } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 
-const API_BASE_URL = "https://servergogo-app-209f1146e735.herokuapp.com/api";
+const API_BASE_URL = "https://projecttour-b58cf17beb2d.herokuapp.com/api";
 const TOUR_API = `${API_BASE_URL}/tours`;
 
 const ManageTour = () => {

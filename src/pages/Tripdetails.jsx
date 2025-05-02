@@ -22,7 +22,7 @@ const TripDetails = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `https://servergogo-app-209f1146e735.herokuapp.com/api/tours/${id}`
+        `https://projecttour-b58cf17beb2d.herokuapp.com/api/tours/${id}`
       );
       // return response.data;
       console.log(response);

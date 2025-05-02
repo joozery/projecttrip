@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://servergogo-app-209f1146e735.herokuapp.com/api";
+const API_BASE_URL = "https://projecttour-b58cf17beb2d.herokuapp.com/api";
 
 // ✅ ฟังก์ชันบันทึกข้อมูลทัวร์ (POST /api/tours)
 export const saveTour = async (tourData) => {
